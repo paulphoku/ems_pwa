@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-col>
+      <form [formGroup]="regForm" (ngSubmit)="register()">
+        <ion-label >Email</ion-label>
+        <ion-input formControlName="email" required placeholder="Email"></ion-input>
+
+        <ion-label >First Name</ion-label>
+        <ion-input formControlName="fname" required placeholder="Email"></ion-input>
+
+        <ion-label >Last Name</ion-label>
+        <ion-input formControlName="lname" required placeholder="Email"></ion-input>
+
+        <ion-label>Password</ion-label>
+        <ion-input formControlName="password" required placeholder="Password" type="Password"></ion-input>
+
+        <ion-label>Password</ion-label>
+        <ion-input formControlName="password1" required placeholder="Password" type="Password"></ion-input>
+
+        <ion-button type="submit" color="primary">Login</ion-button>
+      </form>
+    </ion-col>
+  </ion-grid>
+</ion-content>

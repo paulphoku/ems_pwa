@@ -1,5 +1,7 @@
 {
   "name": "ems",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

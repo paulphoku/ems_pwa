@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Ionic Lists Example
+    </ion-list-header>
+    <ion-item *ngFor="let user of UsersArray">
+      <ion-label>
+        <h2>
+          {{user.t_desc}}
+        </h2>
+        <p>
+          {{user.t_amt}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
