@@ -1,9 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
 
-<ion-content>
+    <ion-tab-button tab="updates">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Updates</ion-label>
+      <ion-badge>6</ion-badge>
+    </ion-tab-button>
 
-</ion-content>
+    <ion-tab-button tab="account">
+      <ion-icon name="wallet"></ion-icon>      
+      <ion-label>Account</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="support">
+      <ion-icon name="help-buoy"></ion-icon>
+      <ion-label>Support</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="about">
+      <ion-icon name="information-circle"></ion-icon>
+      <ion-label>About</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
