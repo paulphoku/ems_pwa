@@ -24,3 +24,66 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.color-primary{color : #795548}
+.color-primary-shade{color: #6a4b3f};
+.color-primary-tint{background-color: #86665a};
+
+.color-secondary{color: #5d4037};
+.color-secondary-shade{color: #523830};
+.color-secondary-tint{color: #6d534b};
+
+.color-tertiary{color: #5260ff};
+.color-tertiary-shade{color: #4854e0};
+.color-tertiary-tint{color: #6370ff};
+
+.color-success{color: #087f23};
+.color-success-shade{color: #07701f};
+.color-success-tint{color: #218c39};
+
+.color-warning{color: #ffc409};
+.color-warning-shade{color: #e0ac08};
+.color-warning-tint{color: #ffca22};
+
+.color-danger{color: #D95525};
+.color-danger-shade{color: #bf4b21};
+.color-danger-tint{color: #dd663b};
+
+.color-dark{color: #222428};
+.color-dark-shade{color: #1e2023};
+.color-dark-tint{color: #383a3e};
+
+.color-medium{color: #92949c};
+.color-medium-shade{color: #808289};
+.color-medium-tint{color: #9d9fa6};
+
+.color-light{color: #f4f5f8};
+.color-light-shade{color: #d7d8da};
+.color-light-tint{color: #f5f6f9};
+  
+
+.txt-center{
+text-align: center;
+}
+
+ion-icon{
+    font-size: 25px;
+    @extend .color-primary;
+}
+ion-card-title{
+    @extend .color-primary;
+}
+ion-title{
+    @extend .color-primary;
+}
+.parent {
+    position: relative;
+}
+  
+.child {
+    /* Center vertically */
+    position: absolute;
+}
+
+    

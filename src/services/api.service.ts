@@ -8,8 +8,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 export class ApiService {
 
   constructor(private http: HttpClient) { }
- // _Url = "https://ems-b.herokuapp.com/"
-  _Url =  "http://localhost:4000/"
+  //_Url = "https://ems-b.herokuapp.com/"
+  _Url =  "http://localhost:8080/"
+  
   //login
   login(email, password) {
     return this.http.post<any>(this._Url + 'login', { email, password });
@@ -22,7 +23,11 @@ export class ApiService {
 
   //get transactions
   get_transactions(uuid) {
-    return this.http.get<any>(this._Url + 'getTrans/' + uuid) 
+    return this.http.get<any>(this._Url + 'transaction/' + uuid)
   }
 
+  //get balance
+  get_balance(uuid) {
+    return this.http.get<any>(this._Url + 'balance/' + uuid) 
+  }
 }

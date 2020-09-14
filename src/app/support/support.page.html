@@ -1,9 +1,74 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>support</ion-title>
+    <ion-title class="txt-center">Support</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-card [routerLink]="['/chat']">
+    <ion-card-header>
+      <ion-row>
+        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+        <ion-col>
+          <ion-card-title>Chat</ion-card-title>
+          <ion-card-subtitle>Talk to us or Enquire about the services</ion-card-subtitle>
+        </ion-col>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card [routerLink]="['/schedules']">
+    <ion-card-header>
+      <ion-row>
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-col>
+          <ion-card-title>Schedules</ion-card-title>
+          <ion-card-subtitle>Check bus routes, where to get them and time</ion-card-subtitle>
+        </ion-col>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card [routerLink]="['/report']">
+    <ion-card-header>
+      <ion-row>
+        <ion-icon name="flag-outline"></ion-icon>
+        <ion-col>
+          <ion-card-title>Report</ion-card-title>
+          <ion-card-subtitle>Report unruly acts, vandalisation ect ...</ion-card-subtitle>
+        </ion-col>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card [routerLink]="['/terms']">
+    <ion-card-header>
+      <ion-row>
+        <ion-icon name="document-text-outline"></ion-icon>
+        <ion-col>
+          <ion-card-title>Terms And Conditions</ion-card-title>
+          <ion-card-subtitle>View ,read and understand terms and conditions</ion-card-subtitle>
+        </ion-col>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card [routerLink]="['/about']">
+    <ion-card-header>
+      <ion-row>
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <ion-col>
+          <ion-card-title>About</ion-card-title>
+          <ion-card-subtitle>The ins and out of the application</ion-card-subtitle>
+        </ion-col>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
 
 </ion-content>

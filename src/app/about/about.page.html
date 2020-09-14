@@ -1,9 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>about</ion-title>
+<ion-footer class="parent">
+  <ion-toolbar (click)="backClicked()">
+    <ion-row >
+      <ion-col class="child">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-col>
+      <ion-title class="txt-center">About</ion-title>
+    </ion-row>
   </ion-toolbar>
-</ion-header>
+</ion-footer>
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>About this app</ion-card-title>
+          <ion-card-subtitle>Talk to us or Enquire about the services</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card [routerLink]="['/terms']">
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-subtitle>© Copyright 2020 | EMS - All Rights reserved</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
 
 </ion-content>

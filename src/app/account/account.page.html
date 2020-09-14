@@ -1,23 +1,100 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>account</ion-title>
+    <ion-title class="txt-center">account</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>
-      Ionic Lists Example
-    </ion-list-header>
-    <ion-item *ngFor="let user of UsersArray">
-      <ion-label>
-        <h2>
-          {{user.t_desc}}
-        </h2>
-        <p>
-          {{user.t_amt}}
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-col>
+      <ion-card>
+        <ion-card-header>
+          <ion-row>
+            <ion-label width="30px">R</ion-label>
+            <ion-col>
+              <ion-card-title>Balance view</ion-card-title>
+            </ion-col>
+            <ion-col>
+              <ion-card-title>R {{Balance}}</ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-row> 
+              <ion-icon style="margin: auto" name="add-circle-outline"></ion-icon>
+            </ion-row>
+            <!-- <ion-row>
+              <ion-col> -->
+                <ion-card-subtitle class="txt-center">Buy prepaid airtime</ion-card-subtitle>
+              <!-- </ion-col>
+            </ion-row> -->
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-row>
+              <ion-icon style="margin: auto" name="chatbox-ellipses-outline" ></ion-icon>
+            </ion-row>
+            <!-- <ion-row>
+              <ion-col> -->
+                <ion-card-subtitle style="text-align: center;" >Top Up Account</ion-card-subtitle>
+              <!-- </ion-col>
+            </ion-row> -->
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+   
+
+    <ion-list>
+      <ion-list-header>
+        Transactions
+      </ion-list-header>
+      <ion-item *ngFor="let transaction of Transaction">
+        <ion-row>
+          <ion-col>
+            <h2>
+              {{transaction.t_day}}
+            </h2>
+            <p>
+              {{transaction.t_month}}
+            </p>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <h2>
+                {{transaction.t_desc}}
+              </h2>
+              <p>
+                {{transaction.tt_desc}}
+              </p>
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <h2>
+              {{transaction.t_amt}}
+            </h2>
+            <p>
+              {{transaction.t_bal }}
+            </p>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+
+
+
 </ion-content>

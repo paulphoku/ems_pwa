@@ -12,16 +12,25 @@ export class AccountPage implements OnInit {
     private apis: ApiService
   ) { }
 
-  UsersArray = [];
+  Transaction = [];
+  Balance;
   
   ngOnInit() {
-    this.apis.get_transactions(
+    this.get_transactions();
+    this.get_balance();
+  }
+
+
+  get_balance(){
+    this.apis.get_balance(
       "'cf0dbec8-6407-4adf-84c8-65b9e95f5ea3'"
     ).subscribe(
       data => {
         
         if (data.code == 200) {
-          this.UsersArray = data.result;
+          this.Balance = data.result;
+          console.log(this.Balance
+          )
         } else {
           console.log("no transactions")
         }
@@ -31,6 +40,22 @@ export class AccountPage implements OnInit {
     )
   }
 
+  get_transactions(){
+    this.apis.get_transactions(
+      "cf0dbec8-6407-4adf-84c8-65b9e95f5ea3"
+    ).subscribe(
+      data => {
+        
+        if (data.code == 200) {
+          this.Transaction = data.result;
+        } else {
+          console.log("no transactions")
+        }
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
 
 
 }

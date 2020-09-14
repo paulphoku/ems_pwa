@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from '../services/api.service'
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

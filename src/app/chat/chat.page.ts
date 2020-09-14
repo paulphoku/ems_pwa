@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.page.html',
-  styleUrls: ['./about.page.scss'],
+  selector: 'app-chat',
+  templateUrl: './chat.page.html',
+  styleUrls: ['./chat.page.scss'],
 })
-export class AboutPage implements OnInit {
+export class ChatPage implements OnInit {
 
   constructor(private _location: Location) 
   {}
@@ -14,7 +14,6 @@ export class AboutPage implements OnInit {
   backClicked() {
     this._location.back();
   }
-
 
   ngOnInit() {
   }
