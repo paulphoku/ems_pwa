@@ -1,6 +1,6 @@
 <ion-footer class="parent">
   <ion-toolbar>
-    <ion-row >
+    <ion-row>
       <ion-col class="child">
       </ion-col>
       <ion-title class="txt-center">Login</ion-title>
@@ -8,15 +8,37 @@
   </ion-toolbar>
 </ion-footer>
 
+
 <ion-content>
+  <ion-col>
+    <ion-slides  pager="true" [options]="slideOpts">
+      <ion-slide>
+        <img src="../../assets/imgs/image_1.jpg" width="100%">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/imgs/image_2.jpg" width="100%" >
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/imgs/image_3.jpg" width="100%">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/imgs/image_4.jpg" width="100%">
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/imgs/image_5.jpg" width="100%">
+      </ion-slide>
+    </ion-slides>
+    
+  </ion-col>
   <ion-grid>
-    <ion-col>
+    
+    <ion-col style="width: fit-content;">
       <form [formGroup]="regForm" (ngSubmit)="revert()">
-        <ion-label >Email</ion-label>
-        <ion-input formControlName="email" required placeholder="Email"></ion-input>
-        <ion-label>Password</ion-label>
+        <ion-label>Enter Email</ion-label>
+        <ion-input formControlName="email" type="text" required placeholder="Email"></ion-input>
+        <ion-label>Enter Password</ion-label>
         <ion-input formControlName="password" required placeholder="Password" type="Password"></ion-input>
-        <ion-button type="submit" color="primary">Login</ion-button>
+        <ion-button class="txt-center" type="submit" color="primary">Login</ion-button>
       </form>
     </ion-col>
   </ion-grid>

@@ -11,7 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from '../services/api.service'
+import { ApiService } from '../services/api.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +31,8 @@ import { ApiService } from '../services/api.service'
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ApiService
+    ApiService,
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })

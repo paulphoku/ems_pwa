@@ -19,6 +19,20 @@ export class LoginPage implements OnInit {
 
   regForm: FormGroup; submitted = false; setError: string;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    width: 411,
+    height: 200,
+    autoplay: {
+      delay: 5000,
+    }
+  };
+
+  startAutoplay() {
+
+  }
+
   ngOnInit() {
     this.regForm = this.fb.group({
       email: ['', Validators.required],

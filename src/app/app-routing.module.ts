@@ -4,9 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'support',
+    redirectTo: 'home/updates',
     pathMatch: 'full'
   },
+  // { 
+  //   path: '**', redirectTo: 'home', 
+  // },  // Wildcard route for a 404 page
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)

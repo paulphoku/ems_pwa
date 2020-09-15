@@ -1,6 +1,6 @@
 <ion-footer class="parent">
   <ion-toolbar (click)="backClicked()">
-    <ion-row >
+    <ion-row>
       <ion-col class="child">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-col>
@@ -9,6 +9,46 @@
   </ion-toolbar>
 </ion-footer>
 
-<ion-content>
+<ion-content fullscreen>
+  <ion-card (click)="launch_browser('https://www.gautrain.co.za/commuter/timetables')">
+    <img src="../../assets/imgs/gautrain_logo.png" />
+    <ion-card-header>
+      <ion-card-title>Gautrain Schedules</ion-card-title>
+      <ion-card-subtitle>Plan your day according to these reliable tables and always be on time</ion-card-subtitle>
+      <ion-icon name="open-outline"></ion-icon>
+    </ion-card-header>
+  </ion-card>
 
+  <ion-card (click)="launch_browser('http://www.metrorail.co.za/Timetables.html')">
+    <ion-col height="200px">
+      <img src="../../assets/imgs/METRO-RAIL-logo.jpg" width="100%" />
+    </ion-col>
+    <ion-card-header>
+      <ion-card-title>Metrorail Schedules</ion-card-title>
+      <ion-card-subtitle>Plan your day according to these reliable tables and always be on time</ion-card-subtitle>
+      <ion-icon name="open-outline"></ion-icon>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card (click)="launch_browser('http://www.bluetrain.co.za/?page_id=683l')">
+    <ion-col height="200px">
+      <img src="../../assets/imgs/blue train logo.jpg" width="100%" />
+    </ion-col>
+    <ion-card-header>
+      <ion-card-title>Blue train Schedules</ion-card-title>
+      <ion-card-subtitle>Plan your day according to these reliable tables and always be on time</ion-card-subtitle>
+      <ion-icon name="open-outline"></ion-icon>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card (click)="launch_browser('https://www.southafricanrailways.co.za/tourist_class_timetable.html')">
+    <ion-col height="200px">
+      <img src="../../assets/imgs/shosholoza-meyl-vector-logo.jpg" width="100%" />
+    </ion-col>
+    <ion-card-header>
+      <ion-card-title>Shosholoza Meyl Train Schedules</ion-card-title>
+      <ion-card-subtitle>Plan your day according to these reliable tables and always be on time</ion-card-subtitle>
+      <ion-icon name="open-outline"></ion-icon>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

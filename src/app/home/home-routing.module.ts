@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../updates/updates.module#UpdatesPageModule'
+            loadChildren: () => import('../updates/updates.module').then( m => m.UpdatesPageModule)
           }
         ]
       },
@@ -22,7 +22,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../account/account.module#AccountPageModule'
+            loadChildren: () => import('../account/account.module').then( m => m.AccountPageModule)
           }
         ]
       },
@@ -31,7 +31,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../support/support.module#SupportPageModule'
+            loadChildren: () => import('../support/support.module').then( m => m.SupportPageModule)
           }
         ]
       },
@@ -40,13 +40,13 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../about/about.module#AboutPageModule'
+            loadChildren: () => import('../about/about.module').then( m => m.AboutPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/home/updates',
+        redirectTo: 'app/home/updates',
         pathMatch: 'full'
       }
     ]

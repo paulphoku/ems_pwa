@@ -25,7 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
 .color-primary{color : #795548}
 .color-primary-shade{color: #6a4b3f};
 .color-primary-tint{background-color: #86665a};
@@ -40,7 +39,7 @@
 
 .color-success{color: #087f23};
 .color-success-shade{color: #07701f};
-.color-success-tint{color: #218c39};
+.color-success-tint{background-color: #218c39};
 
 .color-warning{color: #ffc409};
 .color-warning-shade{color: #e0ac08};
@@ -61,7 +60,6 @@
 .color-light{color: #f4f5f8};
 .color-light-shade{color: #d7d8da};
 .color-light-tint{color: #f5f6f9};
-  
 
 .txt-center{
 text-align: center;
@@ -80,10 +78,43 @@ ion-title{
 .parent {
     position: relative;
 }
+
+card-sucess{
+    @extend .color-success-tint;
+}
   
 .child {
     /* Center vertically */
     position: absolute;
 }
 
-    
+ion-button {
+    border-radius: 25px;
+    background-image: linear-gradient(to right, #795548 , #218c39, #795548);    width : 100%;
+    height: 40px;
+}
+form{
+    margin: 30px;
+}
+
+ion-slides {
+    height: 200px;
+  }
+
+
+// Gradient backgrounds
+@mixin bg-gradient($parent, $gradient) {
+    #{$parent} {
+      background: $gradient;
+    }
+  }
+
+ion-input[type=text] {
+    border: none;
+    border-bottom: 2px solid ;@extend .color-primary;
+}
+
+ion-input[type=password] {
+    border: none;
+    border-bottom: 2px solid ;@extend .color-primary;
+}

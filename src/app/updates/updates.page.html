@@ -1,22 +1,30 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header translucent>
+  <ion-toolbar style="background-color: #86665a;">
     <ion-title class="txt-center">Updates</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
+<ion-content fullscreen>
 
+  <ion-card >
+    <ion-item class="card-sucess">
+      <ion-label>
+        Status : Normal
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="launch_browser('https://ionicframework.com/')">
     <ion-item>
       <ion-avatar item-start>
         <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50">
       </ion-avatar>
-
       <ion-row>
         <ion-card-title>
           Marty McFly
         </ion-card-title>
       </ion-row>
+      
       <ion-row>
         <ion-card-subtitle>
           November 5, 1955
