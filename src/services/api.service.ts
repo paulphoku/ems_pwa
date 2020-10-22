@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -7,10 +8,13 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
-  //_Url = "https://ems-b.herokuapp.com/"
-  _Url =  "http://localhost:8080/"
-  
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
+  _Url = "https://ems-b.herokuapp.com/"
+  //_Url = "http://localhost:8080/"
+
   //login
   login(email, password) {
     return this.http.post<any>(this._Url + 'login', { email, password });
@@ -21,13 +25,31 @@ export class ApiService {
     return this.http.post<any>(this._Url + 'register', { email, password, lname, fname });
   }
 
+  //UPDATE USER
+  update_user(email, password, lname, fname) {
+    var uuid = localStorage.getItem('uuid');
+    return this.http.post<any>(this._Url + 'update_user', { email, password, lname, fname, uuid });
+  }
+
   //get transactions
   get_transactions(uuid) {
-    return this.http.get<any>(this._Url + 'transaction/' + uuid)
+    return this.http.get<any>(this._Url + 'transaction/' + localStorage.getItem('uuid'))
   }
 
   //get balance
   get_balance(uuid) {
-    return this.http.get<any>(this._Url + 'balance/' + uuid) 
+    return this.http.get<any>(this._Url + 'balance/' + localStorage.getItem('uuid'))
+  }
+
+  //get user
+  get_user() {
+    return this.http.get<any>(this._Url + 'getUser/' + localStorage.getItem('uuid'))
+  }
+
+
+
+  logout() {
+    localStorage.clear();
+    this.router.navigateByUrl('login');
   }
 }

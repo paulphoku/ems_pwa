@@ -4,18 +4,18 @@ import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReportPageRoutingModule } from './report-routing.module';
+import { PushPageRoutingModule } from './push-routing.module';
 
-import { ReportPage } from './report.page';
+import { PushPage } from './push.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportPageRoutingModule,
+    PushPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [ReportPage]
+  declarations: [PushPage]
 })
-export class ReportPageModule {}
+export class PushPageModule {}

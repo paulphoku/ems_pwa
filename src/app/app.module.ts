@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +33,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ApiService,
-    InAppBrowser
+    InAppBrowser,
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,41 @@
+<ion-footer class="parent">
+  <ion-toolbar>
+    <ion-item slot="start" lines='none'>
+      <ion-icon routerLink="/home/updates" name="chevron-back-outline"></ion-icon>
+      <ion-title class="txt-center">Push</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-content>
+  <ion-grid>
+    <ion-col>
+      <form [formGroup]="regForm" (ngSubmit)="push()">
+        <ion-label>Priority:</ion-label>
+        <ion-select formControlName="priority" value="select" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="low">low</ion-select-option>
+          <ion-select-option value="medium">medium</ion-select-option>
+          <ion-select-option value="high">high</ion-select-option>
+        </ion-select>
+
+        <ion-label>Link :</ion-label>
+        <ion-input formControlName="type" required type="text"></ion-input>
+
+        <ion-label>Title :</ion-label>
+        <ion-input formControlName="topic" required type="text"></ion-input>
+
+        <ion-label>What woild you like to report :</ion-label>
+        <ion-textarea formControlName="body" placeholder="Enter more information here..."></ion-textarea>
+        <br>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="primary">Push</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="revert()" color="light">Dismiss</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-grid>
+</ion-content>

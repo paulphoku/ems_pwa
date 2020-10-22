@@ -1,14 +1,50 @@
 <ion-footer class="parent">
-  <ion-toolbar (click)="backClicked()">
-    <ion-row >
-      <ion-col class="child">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-col>
+  <ion-toolbar>
+    <ion-item slot="start" lines='none'>
+      <ion-icon routerLink="/home/support" name="chevron-back-outline"></ion-icon>
       <ion-title class="txt-center">Report</ion-title>
-    </ion-row>
+    </ion-item>
   </ion-toolbar>
 </ion-footer>
 
 <ion-content>
+  <ion-grid>
+    <ion-col>
+      <form [formGroup]="regForm" (ngSubmit)="update()">
 
+        <ion-label>Train :</ion-label>
+        <ion-select formControlName="train" value="select" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="Gautrain">Gautrain</ion-select-option>
+          <ion-select-option value="Metrorail">Metrorail</ion-select-option>
+          <ion-select-option value="Blue train">Blue train</ion-select-option>
+          <ion-select-option value="Shosholoza Meyl Train">Shosholoza Meyl Train</ion-select-option>
+        </ion-select>
+
+        <ion-label>Report Type :</ion-label>
+        <ion-select formControlName="type" value="select" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="incident">incident</ion-select-option>
+          <ion-select-option value="Accident">Accident</ion-select-option>
+          <ion-select-option value="Abuse">Abuse</ion-select-option>
+          <ion-select-option value="Vandalism">Vandalism</ion-select-option>
+          <ion-select-option value="Fraud">Fraud</ion-select-option>
+          <ion-select-option value="Discrimination">Discrimination</ion-select-option>
+        </ion-select>
+
+        <ion-label>Report Title :</ion-label>
+        <ion-input formControlName="topic" required type="text"></ion-input>
+
+        <ion-label>What woild you like to report :</ion-label>
+        <ion-textarea formControlName="body" placeholder="Enter more information here..."></ion-textarea>
+        <br>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="primary">Report</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="revert()" color="light">Dismiss</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-grid>
 </ion-content>

@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  onesignal: {
+    appId: 'e9bca909-a3dc-446f-a0bd-e02184daa9cb'
+  }
 
 /*
  * For easier debugging in development mode, you can import the following file

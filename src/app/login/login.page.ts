@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { LoadingController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -14,7 +16,9 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private apis: ApiService
+    private apis: ApiService,
+    public loadingController: LoadingController,
+    public toastController: ToastController
   ) { }
 
   regForm: FormGroup; submitted = false; setError: string;
@@ -34,39 +38,52 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('uuid')) {
+      this.router.navigateByUrl('home/updates');
+    }
+
     this.regForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
-  get email() {
-    return this.regForm.get('email');
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      color: 'warning'
+    });
+    toast.present();
   }
 
-  get password() {
-    return this.regForm.get('password');
-  }
 
-  register() {
+  async login() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'logging in...',
+    });
+    await loading.present();
     let dataset = this.regForm.value;
-    console.log('Email: ' + dataset.email + " Password: " + dataset.password);
-
     this.apis.login(
       dataset.email,
       dataset.password
     ).subscribe(
       data => {
-        if (data.code == 200) {
-          this.router.navigate(['/login']);
+        if (data.status == 0) {
+          loading.dismiss();
           console.log(data);
+          localStorage.setItem('uuid', data.data[0].usr_unique_id);
+          this.router.navigateByUrl('/home/updates');
         } else {
-          console.log(data);
+          loading.dismiss();
+          this.presentToast(data.msg);
         }
       }, error => {
-        console.log(error);
+        //console.log(error);
       }
     )
+
   }
 
   revert() {

@@ -41,13 +41,13 @@
 .color-success-shade{color: #07701f};
 .color-success-tint{background-color: #218c39};
 
-.color-warning{color: #ffc409};
-.color-warning-shade{color: #e0ac08};
-.color-warning-tint{color: #ffca22};
+.color-warning{color: #D95525};
+.color-warning-shade{color: #bf4b21};
+.color-warning-tint{color: #dd663b};
 
-.color-danger{color: #D95525};
-.color-danger-shade{color: #bf4b21};
-.color-danger-tint{color: #dd663b};
+.color-danger{color: #eb445a};
+.color-danger-shade{color: #cf3c4f};
+.color-danger-tint{color: #ed576b};
 
 .color-dark{color: #222428};
 .color-dark-shade{color: #1e2023};
@@ -99,7 +99,7 @@ form{
 
 ion-slides {
     height: 200px;
-  }
+}
 
 
 // Gradient backgrounds
@@ -110,11 +110,20 @@ ion-slides {
   }
 
 ion-input[type=text] {
-    border: none;
-    border-bottom: 2px solid ;@extend .color-primary;
+    text-align: center; 
+    border: 1px solid ;@extend .color-primary;
+    border-radius: 5px;
 }
 
 ion-input[type=password] {
-    border: none;
-    border-bottom: 2px solid ;@extend .color-primary;
+    text-align: center; 
+    border: 1px solid ;@extend .color-primary;
+    border-radius: 5px;
+}
+
+ion-textarea{
+    height: 300px;
+    width: 100%;
+    border: 1px solid ;@extend .color-primary;
+    border-radius: 5px;
 }

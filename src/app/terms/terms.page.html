@@ -1,11 +1,9 @@
 <ion-footer class="parent">
-  <ion-toolbar (click)="backClicked()">
-    <ion-row >
-      <ion-col class="child">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-col>
+  <ion-toolbar>
+    <ion-item  slot="start" lines='none'>
+      <ion-icon  routerLink="/home/support" name="chevron-back-outline"></ion-icon>
       <ion-title class="txt-center">Terms</ion-title>
-    </ion-row>
+    </ion-item>
   </ion-toolbar>
 </ion-footer>
 
