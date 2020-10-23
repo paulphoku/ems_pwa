@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @NgModule({
@@ -25,7 +24,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule
     
   ],
   providers: [

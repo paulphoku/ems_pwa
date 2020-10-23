@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { environment } from '../environments/environment';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,15 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private oneSignal: OneSignal,
+    private toaster: ToastController
 
   ) {
     this.initializeApp();
+    // tslint:disable-next-line:no-angle-bracket-type-assertion
+    //(<any>window).ngxOnesignal = onesignal;
   }
+
+  message;
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -33,7 +39,7 @@ export class AppComponent implements OnInit {
 
         this.oneSignal.handleNotificationReceived().subscribe((data) => {
           // do something when notification is received
-          //this.toaster.successToast(data.payload.body);
+          this.presentToast(data.payload.body);
           //this.oneSignal.getIds;
         });
         this.oneSignal.handleNotificationOpened().subscribe(() => {
@@ -43,9 +49,20 @@ export class AppComponent implements OnInit {
       } else {
 
       }
+    });
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 5000,
+      color: 'primary'
+    });
+    toast.present();
   }
 
   ngOnInit() {
-
+    //console.log(this.message);
   }
+
 }

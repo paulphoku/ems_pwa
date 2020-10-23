@@ -4,9 +4,20 @@
 
 export const environment = {
   production: false,
+  firebase: {
+    apiKey: "AIzaSyBKlQ9tVfKs210LQsDyHi0W75XROJoP3bg",
+    authDomain: "vlearn-5852b.firebaseapp.com",
+    databaseURL: "https://vlearn-5852b.firebaseio.com",
+    projectId: "vlearn-5852b",
+    storageBucket: "vlearn-5852b.appspot.com",
+    messagingSenderId: "202252498571",
+    appId: "1:202252498571:web:8a9c428044b3f87b41c68e",
+    measurementId: "G-JSXZVDPZDK"
+  },
   onesignal: {
     appId: 'e9bca909-a3dc-446f-a0bd-e02184daa9cb'
   }
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
