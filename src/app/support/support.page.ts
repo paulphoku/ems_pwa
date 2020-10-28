@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-support',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SupportPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public alertController: AlertController
+
+  ) { }
 
   ngOnInit() {
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'EMRS',
+      subHeader: 'Caution',
+      message: "THis Feature is not available yet! . Keep a look in the future",
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
