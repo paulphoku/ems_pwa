@@ -10,7 +10,7 @@
 <ion-content>
   <ion-grid>
     <ion-col>
-      <form [formGroup]="regForm" (ngSubmit)="push()">
+      <form [formGroup]="regForm" (ngSubmit)="send_push()">
         <ion-label>Priority:</ion-label>
         <ion-select formControlName="priority" value="select" okText="Okay" cancelText="Dismiss">
           <ion-select-option value="low">low</ion-select-option>
@@ -19,7 +19,7 @@
         </ion-select>
 
         <ion-label>Link :</ion-label>
-        <ion-input formControlName="type" required type="text"></ion-input>
+        <ion-input formControlName="link" required type="text"></ion-input>
 
         <ion-label>Title :</ion-label>
         <ion-input formControlName="topic" required type="text"></ion-input>

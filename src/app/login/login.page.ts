@@ -74,6 +74,7 @@ export class LoginPage implements OnInit {
           loading.dismiss();
           console.log(data);
           localStorage.setItem('uuid', data.data[0].usr_unique_id);
+          localStorage.setItem('ur', data.data[0].usr_role);
           this.router.navigateByUrl('/home/updates');
         } else {
           loading.dismiss();

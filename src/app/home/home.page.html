@@ -2,7 +2,8 @@
   <ion-toolbar>
     <ion-item lines="none" >
       <ion-title >{{header}}</ion-title>
-      <ion-icon (click)='presentOptions()' slot='end' name="options-outline"></ion-icon>
+      <ion-icon *ngIf="role=='normal'" (click)='presentOptions0()' slot='end' name="options-outline"></ion-icon>
+      <ion-icon *ngIf="role=='admin'" (click)='presentOptions1()' slot='end' name="options-outline"></ion-icon>
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +11,6 @@
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
-
       <ion-tab-button tab="updates" (click)='set_selected_tab(1)'>
         <ion-icon name="{{tab_1[0]}}"></ion-icon>
         <ion-label>Updates</ion-label>

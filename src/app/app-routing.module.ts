@@ -65,6 +65,10 @@ const routes: Routes = [
     path: 'push',
     loadChildren: () => import('./push/push.module').then( m => m.PushPageModule)
   },
+  {
+    path: 'reports',
+    loadChildren: () => import('./reports/reports.module').then( m => m.ReportsPageModule)
+  },
 
 
 

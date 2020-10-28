@@ -1,0 +1,38 @@
+<ion-footer class="parent">
+  <ion-toolbar>
+    <ion-item slot="start" lines='none'>
+      <ion-icon routerLink="/home/updates" name="chevron-back-outline"></ion-icon>
+      <ion-title class="txt-center">Reports</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-content fullscreen>
+
+  <ion-card *ngFor="let report of reports" >
+    <ion-item>
+      <ion-icon slot="start" name="newspaper-outline"></ion-icon>
+      <ion-card-title>
+        {{report.title}}
+      </ion-card-title>
+      <ion-card-subtitle slot="end">
+        {{report.created_at.substr(0,10)}}
+      </ion-card-subtitle>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-card-subtitle slot="start">
+        Report Type : {{report.type}}
+      </ion-card-subtitle>
+      <ion-card-subtitle slot="end">
+        Train : {{report.train}}
+      </ion-card-subtitle>
+    </ion-item>
+    
+    <ion-card-content>
+      <p>
+        {{report.message}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

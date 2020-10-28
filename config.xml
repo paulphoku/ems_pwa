@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Ems</name>
+<widget id="io.ionic.starter" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ERMS</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="paulphoku@gmail.com" href="https://github.com/paulphoku">Ionic Framework Team</author>
     <content src="index.html" />
@@ -19,7 +19,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
-         <hook type="after_prepare" src="hooks/copy_android_notification_icons.js" />
+        <hook src="hooks/copy_android_notification_icons.js" type="after_prepare" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
             <application android:usesCleartextTraffic="true" />

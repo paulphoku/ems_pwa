@@ -1,44 +1,28 @@
 <ion-content fullscreen>
 
-  <ion-card >
+  <ion-card style="background-color: primary;">
     <ion-item class="card-sucess">
-      <ion-label>
+      <ion-label class="txt-center">
         Status : Normal
       </ion-label>
     </ion-item>
   </ion-card>
 
-  <ion-card (click)="launch_browser('https://ionicframework.com/')">
+  <ion-card *ngFor="let update of updates" (click)="launch_browser('https://ionicframework.com/')">
     <ion-item>
-      <ion-avatar item-start>
-        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50">
-      </ion-avatar>
-      <ion-row>
-        <ion-card-title>
-          Marty McFly
-        </ion-card-title>
-      </ion-row>
-      
-      <ion-row>
-        <ion-card-subtitle>
-          November 5, 1955
-        </ion-card-subtitle>
-      </ion-row>
+      <ion-icon slot="start" name="newspaper-outline"></ion-icon>
+      <ion-card-title>
+        {{update.title}}
+      </ion-card-title>
+      <ion-card-subtitle slot="end">
+        {{update.created_at.substr(0,10)}}
+      </ion-card-subtitle>
     </ion-item>
-
-
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a
-        DeLorean?! Whoa. This is heavy.</p>
+      <p>
+        {{update.msg}}
+      </p>
     </ion-card-content>
-
-    <ion-row>
-      <ion-col align-self-center text-center>
-        <ion-note>
-          11h ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
-
   </ion-card>
+
 </ion-content>

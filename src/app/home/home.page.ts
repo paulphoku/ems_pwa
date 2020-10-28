@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router'; // import Router from @angular/router
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -14,14 +14,17 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     public actionSheetController: ActionSheetController,
-    private apis: ApiService
+    private apis: ApiService,
+    public alertController: AlertController
   ) { // private member of Router
 
   }
+
   currentPageUrl;
+  role: any;
 
   header = 'Updates';
-  color_off = '#fff';
+  color_off = 'light';
   color_on = 'primary';
   icon_set_off: string[] = ['calendar-outline', 'wallet-outline', 'help-buoy-outline', 'information-circle-outline'];
   icon_set_on: string[] = ['calendar', 'wallet', 'help-buoy', 'information-circle'];
@@ -68,7 +71,39 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl('profile');
   }
 
-  async presentOptions() {
+ 
+
+  async presentOptions0() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Options',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Profile',
+        icon: 'person-outline',
+        handler: () => {
+          this.profile();
+        }
+      },
+      {
+        text: 'Logout',
+        icon: 'log-out-outline',
+        handler: () => {
+          this.apis.logout();
+        }
+      }
+      , {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  async presentOptions1() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Options',
       cssClass: 'my-custom-class',
@@ -84,6 +119,13 @@ export class HomePage implements OnInit {
         icon: 'notifications-outline',
         handler: () => {
           this.router.navigateByUrl('push');
+        }
+      },
+      {
+        text: 'Reports',
+        icon: 'document-text-outline',
+        handler: () => {
+          this.router.navigateByUrl('reports');
         }
       },
       {
@@ -110,6 +152,7 @@ export class HomePage implements OnInit {
     this.tab_2 = [this.icon_set_off[1], this.color_off];
     this.tab_3 = [this.icon_set_off[2], this.color_off];
     this.tab_4 = [this.icon_set_off[3], this.color_off];
+    this.role=localStorage.getItem('ur')
   }
 
 }

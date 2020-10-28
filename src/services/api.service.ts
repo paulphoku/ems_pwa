@@ -46,6 +46,23 @@ export class ApiService {
     return this.http.get<any>(this._Url + 'getUser/' + localStorage.getItem('uuid'))
   }
 
+  send_update(title, message, link, priority) {
+    return this.http.post<any>(this._Url + 'send_updates', { title, message, link, priority });
+  }
+
+  get_all_reports() {
+    return this.http.post<any>(this._Url + 'get_all_reports', {  });
+  }
+
+  get_all_updates() {
+    return this.http.post<any>(this._Url + 'get_all_updates', {  });
+  }
+
+  add_report(train,type,title,message) {
+    return this.http.post<any>(this._Url + 'add_report', { train, type, title, message });
+  }
+
+
 
 
   logout() {

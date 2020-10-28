@@ -1,29 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 
-
 @Component({
-  selector: 'app-updates',
-  templateUrl: './updates.page.html',
-  styleUrls: ['./updates.page.scss'],
+  selector: 'app-reports',
+  templateUrl: './reports.page.html',
+  styleUrls: ['./reports.page.scss'],
 })
-export class UpdatesPage implements OnInit {
+export class ReportsPage implements OnInit {
 
   constructor(
-    private iab: InAppBrowser,
     private apis: ApiService,
     public loadingController: LoadingController,
     public toastController: ToastController,
     public alertController: AlertController
   ) { }
+  reports :any ;
 
   ngOnInit() {
-    this.get_updates();
+    this.get_reports();
   }
-
-  updates: any[];
 
   async presentToast(msg) {
     const toast = await this.toastController.create({
@@ -46,19 +42,18 @@ export class UpdatesPage implements OnInit {
     await alert.present();
   }
 
-
-  async get_updates() {
+  async get_reports() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
     });
     await loading.present();
-    this.apis.get_all_updates().subscribe(
+    this.apis.get_all_reports().subscribe(
       data => {
         if (data.status == 0) {
           loading.dismiss();
           console.log(data.data);
-          this.updates = data.data;
+          this.reports = data.data;
         } else {
           loading.dismiss();
           this.presentAlert(data.msg);
@@ -67,14 +62,6 @@ export class UpdatesPage implements OnInit {
         this.presentAlert(error);
       }
     )
-  }
-
-  launch_browser(link) {
-    const browser = this.iab.create(link, '_blank');
-    browser.show();
-    browser.on('loadstop').subscribe(event => {
-      browser.insertCSS({ code: "body{color: red;" });
-    });
   }
 
 }

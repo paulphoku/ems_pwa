@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account',
@@ -9,7 +10,9 @@ import { ApiService } from '../../services/api.service';
 export class AccountPage implements OnInit {
 
   constructor(
-    private apis: ApiService
+    private apis: ApiService,
+    public alertController: AlertController
+
   ) { }
 
   Transaction = [];
@@ -55,6 +58,18 @@ export class AccountPage implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'EMRS',
+      subHeader: 'Caution',
+      message: "THis Feature is not available yet! . Keep a look in the future",
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 
