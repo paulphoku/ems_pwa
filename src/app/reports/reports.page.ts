@@ -16,6 +16,8 @@ export class ReportsPage implements OnInit {
     public alertController: AlertController
   ) { }
   reports :any ;
+  searchText:any = '';
+
 
   ngOnInit() {
     this.get_reports();
@@ -47,15 +49,15 @@ export class ReportsPage implements OnInit {
       cssClass: 'my-custom-class',
       message: 'Please wait...',
     });
-    await loading.present();
-    this.apis.get_all_reports().subscribe(
+    //await loading.present();
+    this.apis.get_all_reports(this.searchText).subscribe(
       data => {
         if (data.status == 0) {
-          loading.dismiss();
+          //loading.dismiss();
           console.log(data.data);
           this.reports = data.data;
         } else {
-          loading.dismiss();
+          //loading.dismiss();
           this.presentAlert(data.msg);
         }
       }, error => {

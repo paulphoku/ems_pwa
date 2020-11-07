@@ -1,14 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-item lines="none" >
-      <ion-title >{{header}}</ion-title>
-      <ion-icon *ngIf="role=='normal'" (click)='presentOptions0()' slot='end' name="options-outline"></ion-icon>
+    <ion-item lines="none">
+      <ion-icon name="menu"  (click)="openMenu()"></ion-icon>
+
+      <ion-title>{{header}}</ion-title>
+      <!-- <ion-icon *ngIf="role=='normal'" (click)='presentOptions0()' slot='end' name="options-outline"></ion-icon>
       <ion-icon *ngIf="role=='admin'" (click)='presentOptions1()' slot='end' name="options-outline"></ion-icon>
+     -->
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="main">
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="updates" (click)='set_selected_tab(1)'>
@@ -34,3 +37,68 @@
     </ion-tab-bar>
   </ion-tabs>
 </ion-content>
+
+<ion-menu side="start" type="reveal" contentId="main">
+  <ion-header>
+    <ion-toolbar color="">
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>Menu</ion-label>
+        <ion-icon slot="end" name="close" (click)="closeMenu()"></ion-icon>
+      </ion-item>
+
+      <ion-item routerLink="/profile">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>
+          Profile
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="role=='normal'" routerLink="/report">
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+        <ion-label>
+          Send Report
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="role=='admin'" routerLink="/push">
+        <ion-icon name="notifications-outline" slot="start"></ion-icon>
+        <ion-label>
+          Send Update
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="role=='admin'" routerLink="/reports">
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+        <ion-label>
+          Reports
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="role=='normal'" routerLink="/reports">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label>
+          Schedules
+        </ion-label>
+      </ion-item>
+
+      <ion-item routerLink="/terms">
+        <ion-icon name="information-outline" slot="start"></ion-icon>
+        <ion-label>
+          About
+        </ion-label>
+      </ion-item>
+
+      <ion-item (click)="logout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>
+          Logout
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>

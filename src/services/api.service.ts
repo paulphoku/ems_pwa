@@ -12,8 +12,8 @@ export class ApiService {
     private http: HttpClient,
     private router: Router
   ) { }
-  _Url = "https://ems-b.herokuapp.com/"
-  //_Url = "http://localhost:8080/"
+  //_Url = "https://ems-b.herokuapp.com/"
+  _Url = "http://localhost:8080/"
 
   //login
   login(email, password) {
@@ -32,12 +32,13 @@ export class ApiService {
   }
 
   //get transactions
-  get_transactions(uuid) {
+  get_transactions() {
+    var uuid = localStorage.getItem('uuid');
     return this.http.get<any>(this._Url + 'transaction/' + localStorage.getItem('uuid'))
   }
 
   //get balance
-  get_balance(uuid) {
+  get_balance() {
     return this.http.get<any>(this._Url + 'balance/' + localStorage.getItem('uuid'))
   }
 
@@ -50,20 +51,17 @@ export class ApiService {
     return this.http.post<any>(this._Url + 'send_updates', { title, message, link, priority });
   }
 
-  get_all_reports() {
-    return this.http.post<any>(this._Url + 'get_all_reports', {  });
+  get_all_reports(searchText) {
+    return this.http.post<any>(this._Url + 'get_all_reports', { searchText });
   }
 
-  get_all_updates() {
-    return this.http.post<any>(this._Url + 'get_all_updates', {  });
+  get_all_updates(searchText) {
+    return this.http.post<any>(this._Url + 'get_all_updates', { searchText });
   }
 
   add_report(train,type,title,message) {
     return this.http.post<any>(this._Url + 'add_report', { train, type, title, message });
   }
-
-
-
 
   logout() {
     localStorage.clear();

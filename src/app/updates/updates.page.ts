@@ -19,6 +19,8 @@ export class UpdatesPage implements OnInit {
     public alertController: AlertController
   ) { }
 
+  searchText:any = '';
+
   ngOnInit() {
     this.get_updates();
   }
@@ -52,15 +54,15 @@ export class UpdatesPage implements OnInit {
       cssClass: 'my-custom-class',
       message: 'Please wait...',
     });
-    await loading.present();
-    this.apis.get_all_updates().subscribe(
+    //await loading.present();
+    this.apis.get_all_updates(this.searchText).subscribe(
       data => {
         if (data.status == 0) {
-          loading.dismiss();
+          //loading.dismiss();
           console.log(data.data);
           this.updates = data.data;
         } else {
-          loading.dismiss();
+          //loading.dismiss();
           this.presentAlert(data.msg);
         }
       }, error => {

@@ -9,6 +9,12 @@
 
 <ion-content fullscreen>
 
+  <ion-card style="background-color: primary;">
+    <ion-item class="card-sucess" lines='none'>
+      <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_reports()" showCancelButton="focus"></ion-searchbar>
+    </ion-item>
+  </ion-card>
+
   <ion-card *ngFor="let report of reports" >
     <ion-item>
       <ion-icon slot="start" name="newspaper-outline"></ion-icon>

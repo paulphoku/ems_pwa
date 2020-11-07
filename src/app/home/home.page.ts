@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router'; // import Router from @angular/router
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ActionSheetController, AlertController, MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -15,7 +15,9 @@ export class HomePage implements OnInit {
     private router: Router,
     public actionSheetController: ActionSheetController,
     private apis: ApiService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private menu: MenuController,
+
   ) { // private member of Router
 
   }
@@ -33,6 +35,31 @@ export class HomePage implements OnInit {
   tab_2: string[] = [this.icon_set_off[1], this.color_off];
   tab_3: string[] = [this.icon_set_off[2], this.color_off];
   tab_4: string[] = [this.icon_set_off[3], this.color_off];
+
+  
+
+  async  openMenu() {
+    await this.menu.open();
+  }
+
+  async  closeMenu() {
+    await this.menu.close();
+  }
+
+
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
+
+  openEnd() {
+    this.menu.open('end');
+  }
+
+  openCustom() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
+  }
 
   set_selected_tab(tab) {
     if (tab == 1) {
@@ -152,7 +179,17 @@ export class HomePage implements OnInit {
     this.tab_2 = [this.icon_set_off[1], this.color_off];
     this.tab_3 = [this.icon_set_off[2], this.color_off];
     this.tab_4 = [this.icon_set_off[3], this.color_off];
-    this.role=localStorage.getItem('ur')
+    this.role=localStorage.getItem('ur');
+  }
+
+  logout(){
+    this.apis.logout();
+  }
+
+  ionViewWillEnter(){
+    this.closeMenu();
+    this.role=localStorage.getItem('ur');
+
   }
 
 }

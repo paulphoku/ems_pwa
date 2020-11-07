@@ -1,14 +1,12 @@
 <ion-content fullscreen>
 
   <ion-card style="background-color: primary;">
-    <ion-item class="card-sucess">
-      <ion-label class="txt-center">
-        Status : Normal
-      </ion-label>
+    <ion-item class="card-sucess" lines='none'>
+      <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_updates()" showCancelButton="focus"></ion-searchbar>
     </ion-item>
   </ion-card>
 
-  <ion-card *ngFor="let update of updates" (click)="launch_browser('update.link')">
+  <ion-card *ngFor="let update of updates" (click)="launch_browser(update.link)">
     <ion-item>
       <ion-icon slot="start" name="newspaper-outline"></ion-icon>
       <ion-card-title>

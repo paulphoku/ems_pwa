@@ -26,7 +26,6 @@ export class AccountPage implements OnInit {
 
   get_balance(){
     this.apis.get_balance(
-      "'cf0dbec8-6407-4adf-84c8-65b9e95f5ea3'"
     ).subscribe(
       data => {
         
@@ -45,7 +44,6 @@ export class AccountPage implements OnInit {
 
   get_transactions(){
     this.apis.get_transactions(
-      "cf0dbec8-6407-4adf-84c8-65b9e95f5ea3"
     ).subscribe(
       data => {
         

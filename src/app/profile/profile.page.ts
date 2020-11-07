@@ -104,9 +104,6 @@ export class ProfilePage implements OnInit {
     }else{
       this.presentToast("Fill in All the fields!");
     }
-
-   
-
   }
 
   revert() {
