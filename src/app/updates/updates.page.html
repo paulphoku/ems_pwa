@@ -1,10 +1,7 @@
 <ion-content fullscreen>
 
-  <ion-card style="background-color: primary;">
-    <ion-item class="card-sucess" lines='none'>
-      <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_updates()" showCancelButton="focus"></ion-searchbar>
-    </ion-item>
-  </ion-card>
+
+  <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_updates()" showCancelButton="focus"></ion-searchbar>
 
   <ion-card *ngFor="let update of updates" (click)="launch_browser(update.link)">
     <ion-item>

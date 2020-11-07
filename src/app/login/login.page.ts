@@ -84,7 +84,12 @@ export class LoginPage implements OnInit {
         //console.log(error);
       }
     )
+  }
 
+  ionViewWillEnter() {
+    if(localStorage.getItem('uuid')){
+      this.router.navigateByUrl('home/updates');
+    }
   }
 
   revert() {

@@ -82,6 +82,10 @@ ion-title{
 card-sucess{
     @extend .color-success-tint;
 }
+
+.new-background-color{
+    --background: #795548;
+}
   
 .child {
     /* Center vertically */

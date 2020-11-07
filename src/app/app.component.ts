@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
-        this.statusBar.styleDefault();
-        this.splashScreen.hide();
+        // set status bar to white
+        this.statusBar.backgroundColorByHexString('#795548'); this.splashScreen.hide();
         this.oneSignal.startInit(environment.onesignal.appId, environment.firebase.messagingSenderId);
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
