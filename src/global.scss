@@ -84,12 +84,18 @@ card-sucess{
 }
 
 .new-background-color{
-    --background: #795548;
+    --bullet-background: #795548;
 }
   
 .child {
     /* Center vertically */
     position: absolute;
+}
+
+
+ion-slides {
+    height: 100%;
+    --background: #795548;
 }
 
 ion-button {
@@ -112,17 +118,28 @@ ion-slides {
       background: $gradient;
     }
   }
-
+  ion-content{
+    --background: #f5f6f9 no-repeat center center / cover;
+}
 ion-input[type=text] {
     text-align: center; 
     border: 1px solid ;@extend .color-primary;
     border-radius: 5px;
+    background-color: #fff;
+}
+
+ion-input[type=tel] {
+    text-align: center; 
+    border: 1px solid ;@extend .color-primary;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 ion-input[type=password] {
     text-align: center; 
     border: 1px solid ;@extend .color-primary;
     border-radius: 5px;
+    background-color: #fff;
 }
 
 ion-textarea{
@@ -130,4 +147,5 @@ ion-textarea{
     width: 100%;
     border: 1px solid ;@extend .color-primary;
     border-radius: 5px;
+    background-color: #fff;
 }

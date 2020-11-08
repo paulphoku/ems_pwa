@@ -1,7 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_updates()" showCancelButton="focus"></ion-searchbar>
+    <ion-item>
+      <ion-label>Filter By Train:</ion-label>
+      <ion-select [(ngModel)]="filterText" (ngModelChange)="filterOnclick()" value="select" okText="Okay"
+        cancelText="Dismiss">
+        <ion-select-option >Gautrain</ion-select-option>
+        <ion-select-option>Metrorail</ion-select-option>
+        <ion-select-option>Blue train</ion-select-option>
+        <ion-select-option>Shosholoza</ion-select-option>
+      </ion-select>
+      <!-- <ion-icon name="close-outline"></ion-icon> -->
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content fullscreen>
-
-
-  <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_updates()" showCancelButton="focus"></ion-searchbar>
 
   <ion-card *ngFor="let update of updates" (click)="launch_browser(update.link)">
     <ion-item>

@@ -1,7 +1,7 @@
 <ion-footer class="parent">
   <ion-toolbar>
-    <ion-item  slot="start" lines='none'>
-      <ion-icon  routerLink="/login" name="chevron-back-outline"></ion-icon>
+    <ion-item slot="start" lines='none'>
+      <ion-icon routerLink="/login" name="chevron-back-outline"></ion-icon>
       <ion-title class="txt-center">Profile</ion-title>
     </ion-item>
   </ion-toolbar>
@@ -12,23 +12,22 @@
     <ion-col>
       <form [formGroup]="regForm" (ngSubmit)="update()">
         <ion-label>Enter Email :</ion-label>
-        <ion-input formControlName="email" required placeholder="Email" type="text" ></ion-input>
+        <ion-input formControlName="email" required placeholder="Email" type="text"></ion-input>
 
         <ion-label>Enter First Name :</ion-label>
         <ion-input formControlName="fname" required placeholder="First Name" type="text"></ion-input>
 
         <ion-label>Enter Last Name :</ion-label>
         <ion-input formControlName="lname" required placeholder="Last Name" type="text"></ion-input>
-        
+
+        <ion-label>Enter Cellphone :</ion-label>
+        <ion-input formControlName="cell" required placeholder="Cellphone" type="tel" inputmode="tel"></ion-input>
+
         <br>
-        <ion-row>
-          <ion-col>
-            <ion-button type="submit" color="primary">Update</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button (click)="revert()" color="light">Cancel</ion-button>
-          </ion-col>
-        </ion-row>
+        
+        <ion-button class="txt-center" type="submit"  color="primary">Update profile</ion-button>
+        <ion-button class="txt-center"  (click)="changePass()" color="primary">Change Password</ion-button>
+        <ion-button class="txt-center"  (click)="deregister()" color="danger">Delete Account</ion-button>
       </form>
     </ion-col>
   </ion-grid>

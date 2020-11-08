@@ -1,0 +1,44 @@
+<ion-content>
+  <ion-row  class="booking-form">
+    
+  </ion-row>
+
+  <div class="booking-form">
+    <ion-list-header>Users ({{count}})</ion-list-header>
+    <ion-list-item>
+      <ion-card *ngFor="let item of users" (click)="userAlert(item.usr_email, item.usr_unique_id)">
+        <ion-item>
+          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+          <ion-card-title>
+            {{item.usr_email}}
+          </ion-card-title>
+          <ion-card-subtitle slot="end">
+            {{item.usr_created_at.substr(0,10)}}
+          </ion-card-subtitle>
+        </ion-item>
+  
+        <ion-card-content>
+          <p>
+            User Type: {{item.usr_role}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-list-item>
+
+    
+  </div>
+
+</ion-content>
+
+<ion-header>      
+  <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="searcher()" showCancelButton="focus"></ion-searchbar>
+</ion-header>
+
+<ion-footer class="parent">
+  <ion-toolbar>
+    <ion-item slot="start" lines='none'>
+      <ion-icon routerLink="/home/updates" name="chevron-back-outline"></ion-icon>
+      <ion-title class="txt-center">Dashboard</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

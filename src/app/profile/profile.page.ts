@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { LoadingController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController, MenuController, NavController } from '@ionic/angular';
+import { ToasterService } from '../../services/toaster.service';
+import { discardPeriodicTasks } from '@angular/core/testing';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,11 @@ export class ProfilePage implements OnInit {
     private fb: FormBuilder,
     private apis: ApiService,
     public loadingController: LoadingController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private toaster: ToasterService,
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+
   ) { }
 
   regForm: FormGroup; submitted = false; setError: string;
@@ -26,10 +31,14 @@ export class ProfilePage implements OnInit {
     this.regForm = this.fb.group({
       email: ['', Validators.required],
       lname: ['', Validators.required],
-      fname: ['', Validators.required]
+      fname: ['', Validators.required],
+      cell: ['', Validators.required]
     });
 
     this.regForm.controls['email'].disable()
+  }
+
+  ionViewWillEnter() {
     this.get_user();
   }
 
@@ -42,7 +51,7 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
 
-  async get_user(){
+  async get_user() {
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
@@ -54,13 +63,14 @@ export class ProfilePage implements OnInit {
           loading.dismiss();
           console.log(data);
           this.regForm.setValue({
-            'email':data.data[0].usr_email,
-            'lname':data.data[0].usr_lname,
-            'fname':data.data[0].usr_fname
+            'email': data.data[0].usr_email,
+            'lname': data.data[0].usr_lname,
+            'fname': data.data[0].usr_fname,
+            'cell': data.data[0].usr_cell
           })
         } else {
           loading.dismiss();
-          this.presentToast(data.msg);
+          this.toaster.errorToast(data.msg);
         }
       }, error => {
         //console.log(error);
@@ -70,44 +80,183 @@ export class ProfilePage implements OnInit {
 
   async update() {
     let dataset = this.regForm.value;
-    if(dataset.lname && dataset.lname){
-      if(true){
+    if (dataset.lname && dataset.lname) {
+      if (true) {
         const loading = await this.loadingController.create({
           cssClass: 'my-custom-class',
           message: 'Please wait...',
         });
-        await loading.present();
-        this.apis.update_user(
-          dataset.email,
-          dataset.password,
-          dataset.lname,
-          dataset.fname
-        ).subscribe(
-          data => {
-            if (data.status == 0) {
+        if(!this.apis.validateCell(dataset.cell) && dataset.cell.length != 10){
+          this.presentAlert('Invalid Phone number');
+        }else{
+          await loading.present();
+          this.apis.update_user(
+            dataset.email,
+            dataset.password,
+            dataset.lname,
+            dataset.fname,
+            dataset.cell
+          ).subscribe(
+            data => {
+              if (data.status == 0) {
+                loading.dismiss();
+                this.toaster.successToast(data.msg);
+                //console.log(data);
+              } else {
+                loading.dismiss();
+                this.toaster.errorToast(data.msg);
+              }
+            }, error => {
+              //console.log(error);
               loading.dismiss();
-              this.presentToast(data.msg);
-              //console.log(data);
-            } else {
-              loading.dismiss();
-              this.presentToast(data.msg);
+              this.presentToast("can't connect to server at the moment");
             }
-          }, error => {
-            //console.log(error);
-            loading.dismiss();
-            this.presentToast("can't connect to server at the moment");
-          }
-        )
-      }else{
+          )
+        }
+       
+      } else {
         this.presentToast("Passwords Do not Match!");
       }
-    }else{
+    } else {
       this.presentToast("Fill in All the fields!");
     }
+  }
+
+  async deregister() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: '<strong>Delete account?</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.doDeleteUser();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async changePass() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Change Password!',
+      inputs: [
+        {
+          name: 'pass',
+          type: 'password',
+          placeholder: 'New Password',
+          cssClass: 'specialClass',
+          attributes: {
+            inputmode: 'decimal'
+          }
+        },
+        {
+          name: 'pass1',
+          type: 'password',
+          placeholder: 'Confirm Password',
+          cssClass: 'specialClass',
+          attributes: {
+            inputmode: 'decimal'
+          }
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            this.doChangePassword(data.pass, data.pass1);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async doChangePassword(password, password1) {
+    const loading = await this.loadingCtrl.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+
+    if (password == '' || password1 == '') {
+      this.presentAlert('Password fields required');
+    } else if (password1 != password) {
+      this.presentAlert('Passwords do not match! ');
+    } else {
+      await loading.present();
+      this.apis.update_password(password).subscribe(
+        data => {
+          if (data.status == 0) {
+            loading.dismiss();
+            this.toaster.successToast(data.msg);
+          } else {
+            loading.dismiss();
+            this.presentAlert(data.msg);
+          }
+        }, error => {
+          loading.dismiss();
+          this.presentAlert(error.message);
+        }
+      );
+    }
+  }
+
+  async doDeleteUser() {
+    const loading = await this.loadingCtrl.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+    });
+
+    await loading.present();
+    this.apis.remove_user(localStorage.getItem('uuid')).subscribe(
+      data => {
+        if (data.status == 0) {
+          loading.dismiss();
+          this.toaster.successToast(data.msg);
+          localStorage.clear();
+        } else {
+          loading.dismiss();
+          this.presentAlert(data.msg);
+        }
+      }, error => {
+        loading.dismiss();
+        this.presentAlert(error.message);
+      }
+    );
+  }
+
+  async presentAlert(msg) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Air Food ✈️',
+      subHeader: 'Warning',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   revert() {
     // this.regForm.reset();
     this.router.navigateByUrl('home/updates');
   }
+
+
 }

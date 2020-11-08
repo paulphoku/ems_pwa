@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { LoadingController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController, MenuController, NavController } from '@ionic/angular';
+import { ToasterService } from '../../services/toaster.service';
 
 
 @Component({
@@ -18,10 +18,14 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private apis: ApiService,
     public loadingController: LoadingController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    private toaster: ToasterService,
+
   ) { }
 
-  regForm: FormGroup; submitted = false; setError: string;
+  loginForm: FormGroup; submitted = false; setError: string;
 
   slideOpts = {
     initialSlide: 0,
@@ -37,12 +41,84 @@ export class LoginPage implements OnInit {
 
   }
 
+  async presentAlert(msg) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'ERMS',
+      subHeader: 'Warning',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async resetPass() {
+    let email = this.loginForm.get('email').value;
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Reset Password!',
+      inputs: [
+        {
+          name: 'email',
+          type: 'text',
+          placeholder: 'Enter your Email',
+          cssClass: 'specialClass',
+          attributes: {
+            inputmode: 'decimal',
+            value: ''
+          }
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Ok',
+          handler: async (data) => {
+            const loading = await this.loadingCtrl.create({
+              cssClass: 'my-custom-class',
+              message: 'Please wait...',
+            });
+            if(data.email.length < 3) {
+              this.presentAlert('Email Required');
+            }else {
+              await loading.present();
+              this.apis.reset_Password(
+                data.email
+              ).subscribe(
+                data => {
+                  if (data.status == 0) {
+                    loading.dismiss();
+                    this.toaster.successToast(data.msg);
+                    this.presentAlert('Password reseted check your emails for further instructions!')
+                    console.log(data);
+                  } else {
+                    loading.dismiss();
+                    this.presentAlert(data.msg);
+                  }
+                }, error => {
+                  loading.dismiss();
+                  this.presentAlert(error.message);
+                }
+              )
+            } 
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   ngOnInit() {
     if (localStorage.getItem('uuid')) {
       this.router.navigateByUrl('home/updates');
     }
 
-    this.regForm = this.fb.group({
+    this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
@@ -64,7 +140,7 @@ export class LoginPage implements OnInit {
       message: 'logging in...',
     });
     await loading.present();
-    let dataset = this.regForm.value;
+    let dataset = this.loginForm.value;
     this.apis.login(
       dataset.email,
       dataset.password

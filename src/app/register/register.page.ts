@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { LoadingController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController, MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +16,9 @@ export class RegisterPage implements OnInit {
     private fb: FormBuilder,
     private apis: ApiService,
     public loadingController: LoadingController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private alertCtrl: AlertController,
+
   ) { }
 
   regForm: FormGroup; submitted = false; setError: string;
@@ -29,6 +30,7 @@ export class RegisterPage implements OnInit {
       password1: ['', Validators.required],
       lname: ['', Validators.required],
       fname: ['', Validators.required],
+      cell: ['', Validators.required],
     });
   }
 
@@ -49,26 +51,34 @@ export class RegisterPage implements OnInit {
           cssClass: 'my-custom-class',
           message: 'Please wait...',
         });
-        await loading.present();
-        this.apis.register(
-          dataset.email,
-          dataset.password,
-          dataset.lname,
-          dataset.fname
-        ).subscribe(
-          data => {
-            if (data.ststus == 0) {
-              loading.dismiss();
-              this.router.navigate(['/login']);
-              //console.log(data);
-            } else {
-              loading.dismiss();
-              this.presentToast(data.msg);
+        if(!this.apis.validateCell(dataset.cell) && dataset.cell.length != 10){
+          this.presentAlert('Invalid Phone number');
+        }else if (!this.apis.validateEmail(dataset.email)) {
+          this.presentAlert('Invalid email address');
+        }else {
+          await loading.present();
+          this.apis.register(
+            dataset.email,
+            dataset.password,
+            dataset.lname,
+            dataset.fname,
+            dataset.cell
+          ).subscribe(
+            data => {
+              if (data.ststus == 0) {
+                loading.dismiss();
+                this.router.navigate(['/login']);
+                //console.log(data);
+              } else {
+                loading.dismiss();
+                this.presentToast(data.msg);
+              }
+            }, error => {
+              //console.log(error);
             }
-          }, error => {
-            //console.log(error);
-          }
-        )
+          )
+        }
+        
       }else{
         this.presentToast("Passwords Do not Match!");
       }
@@ -78,6 +88,17 @@ export class RegisterPage implements OnInit {
 
    
 
+  }
+
+  async presentAlert(msg) {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'ERMS',
+      subHeader: 'Warning',
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   revert() {

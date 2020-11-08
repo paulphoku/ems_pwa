@@ -9,37 +9,39 @@
 </ion-footer>
 
 
+
 <ion-content>
-  <ion-col>
-    <ion-slides  pager="true" [options]="slideOpts">
-      <ion-slide>
-        <img src="../../assets/imgs/image_1.jpg" width="100%">
-      </ion-slide>
-      <!-- <ion-slide>
-        <img src="../../assets/imgs/image_2.jpg" width="100%" >
-      </ion-slide>
-      <ion-slide>
-        <img src="../../assets/imgs/image_3.jpg" width="100%">
-      </ion-slide>
-      <ion-slide>
-        <img src="../../assets/imgs/image_4.jpg" width="100%">
-      </ion-slide>
-      <ion-slide>
-        <img src="../../assets/imgs/image_5.jpg" width="100%">
-      </ion-slide> -->
-    </ion-slides>
-    
-  </ion-col>
+  <ion-slides class="new-background-color" pager="true" [options]="slideOpts">
+    <ion-slide class="new-background-color">
+      <img src="../../assets/imgs/image_1.jpg" style="object-fit: fill;">
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/imgs/image_2.jpg" style="object-fit: fill;">
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/imgs/image_3.jpg">
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/imgs/image_4.jpeg">
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/imgs/image_5.jpg">
+    </ion-slide>
+  </ion-slides>
+
   <ion-grid>
-    
-    <ion-col style="width: fit-content;">
-      <form [formGroup]="regForm" (ngSubmit)="login()">
+
+    <ion-col class="txt-center" style="width: fit-content;">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <ion-input formControlName="email" type="text" required placeholder="Email"></ion-input>
         <br>
         <ion-input formControlName="password" required placeholder="Password" type="Password"></ion-input>
         <br>
         <ion-button class="txt-center" type="submit" color="primary">Login</ion-button>
         <ion-button routerLink='/register' style="border :primary;" color="light">Register</ion-button>
+        <br>
+        <br>
+        <ion-label  color="primary" (click)="resetPass()">Forgot Password? Click here.</ion-label>
       </form>
     </ion-col>
   </ion-grid>

@@ -1,22 +1,20 @@
 <ion-content>
   <ion-grid>
-    <ion-col>
-      <ion-card>
-        <ion-card-header>
-          <ion-item lines="none">
-            <ion-card-title >Balance view</ion-card-title>
-            <ion-card-title slot="end">R {{Balance}}</ion-card-title>
-          </ion-item>
-        </ion-card-header>
-      </ion-card>
-    </ion-col>
+    <ion-card>
+      <ion-card-header>
+        <ion-item lines="none">
+          <ion-card-title>Balance view</ion-card-title>
+          <ion-card-title slot="end">R {{Balance}}</ion-card-title>
+        </ion-item>
+      </ion-card-header>
+    </ion-card>
 
     <ion-row>
       <ion-col>
         <ion-card (click)="presentAlert()">
           <ion-card-header>
             <ion-row>
-              <ion-icon style="margin: auto" name="add-circle-outline"></ion-icon>
+              <ion-icon style="margin: auto" name="cellular-outline"></ion-icon>
             </ion-row>
             <!-- <ion-row>
               <ion-col> -->
@@ -28,10 +26,10 @@
       </ion-col>
 
       <ion-col>
-        <ion-card (click)="presentAlert()">
+        <ion-card (click)="addBalanceAlert()">
           <ion-card-header>
             <ion-row>
-              <ion-icon style="margin: auto" name="chatbox-ellipses-outline"></ion-icon>
+              <ion-icon style="margin: auto" name="card-outline"></ion-icon>
             </ion-row>
             <!-- <ion-row>
               <ion-col> -->
@@ -49,38 +47,46 @@
       <ion-list-header>
         Transactions
       </ion-list-header>
-      <ion-item *ngFor="let transaction of Transaction">
-        <ion-row>
-          <ion-col>
-            <h2>
-              {{transaction.t_day}}
-            </h2>
-            <p>
-              {{transaction.t_month}}
-            </p>
-          </ion-col>
-          <ion-col>
-            <ion-label>
-              <h2>
-                {{transaction.t_desc}}
-              </h2>
-              <p>
-                {{transaction.tt_desc}}
-              </p>
-            </ion-label>
-          </ion-col>
-          <ion-col>
-            <h2>
-              {{transaction.t_amt}}
-            </h2>
-            <p>
-              {{transaction.t_bal }}
-            </p>
-          </ion-col>
 
-        </ion-row>
-
+      <ion-item *ngFor="let item of Transaction" lines="none">
+        <ion-card-title slot="start">
+          <ion-col>
+            <ion-row>
+             <strong>{{item.t_day}}</strong> 
+            </ion-row>
+            <ion-row style="font-size: small;">
+              {{item.t_month}}
+            </ion-row>
+          </ion-col>
+        </ion-card-title>     
+        <ion-card-title>
+          <ion-col>
+            <ion-row style="font-size: medium;">
+              {{item.t_desc}}
+            </ion-row>
+            <ion-row>
+              {{item.tt_desc}}
+            </ion-row>
+          </ion-col>
+        </ion-card-title>
+        <ion-card-title slot="end">
+          <ion-col>
+            <ion-row *ngIf="item.t_amt>0" style="color: #087f23;">
+              R{{item.t_amt}}
+            </ion-row>
+            <ion-row *ngIf="item.t_amt<=0" style="color: danger;">
+              R{{item.t_amt}}
+            </ion-row>
+            <ion-row *ngIf="item.t_bal<=0" style="color: danger;">
+              R{{item.t_bal}}
+            </ion-row>
+            <ion-row *ngIf="item.t_bal>0" style="color: danger;">
+              R{{item.t_bal}}
+            </ion-row>
+          </ion-col>
+        </ion-card-title>
       </ion-item>
+       
     </ion-list>
   </ion-grid>
 

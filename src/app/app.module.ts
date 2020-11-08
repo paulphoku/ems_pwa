@@ -15,6 +15,8 @@ import { ApiService } from '../services/api.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
+import { ToasterService } from '../services/toaster.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,7 +35,8 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ApiService,
     InAppBrowser,
-    OneSignal
+    OneSignal,
+    ToasterService
   ],
   bootstrap: [AppComponent]
 })

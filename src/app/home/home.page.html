@@ -1,12 +1,8 @@
 <ion-header class="new-background-color">
   <ion-toolbar>
     <ion-item lines="none">
-      <ion-icon name="menu"  (click)="openMenu()"></ion-icon>
-
+      <ion-icon name="menu" (click)="openMenu()"></ion-icon>
       <ion-title>{{header}}</ion-title>
-      <!-- <ion-icon *ngIf="role=='normal'" (click)='presentOptions0()' slot='end' name="options-outline"></ion-icon>
-      <ion-icon *ngIf="role=='admin'" (click)='presentOptions1()' slot='end' name="options-outline"></ion-icon>
-     -->
     </ion-item>
   </ion-toolbar>
 </ion-header>
@@ -38,7 +34,7 @@
   </ion-tabs>
 </ion-content>
 
-<ion-menu side="start" type="reveal" contentId="main">
+<ion-menu side="start" contentId="main">
   <ion-header>
     <ion-toolbar color="">
     </ion-toolbar>
@@ -54,6 +50,13 @@
         <ion-icon name="person-outline" slot="start"></ion-icon>
         <ion-label>
           Profile
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngIf="role=='admin'" routerLink="/dashboard">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label>
+          User Management
         </ion-label>
       </ion-item>
 

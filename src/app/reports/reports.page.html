@@ -7,9 +7,11 @@
   </ion-toolbar>
 </ion-footer>
 
-<ion-content fullscreen>
+<ion-header class="parent">
   <ion-searchbar [(ngModel)]="searchText" (ngModelChange)="get_reports()" showCancelButton="focus"></ion-searchbar>
+</ion-header>
 
+<ion-content fullscreen>
   <ion-card *ngFor="let report of reports">
     <ion-item>
       <ion-icon slot="start" name="newspaper-outline"></ion-icon>

@@ -20,6 +20,13 @@ export class UpdatesPage implements OnInit {
   ) { }
 
   searchText:any = '';
+  filterText:any = '';
+
+  filterOnclick(){
+    console.log(this.filterText);
+    this.searchText = this.filterText;
+    this.get_updates();
+  }
 
   ngOnInit() {
     this.get_updates();
