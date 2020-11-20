@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { AlertController, ToastController, LoadingController, MenuController, NavController } from '@ionic/angular';
 import { ToasterService } from '../../services/toaster.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class LoginPage implements OnInit {
     private alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private toaster: ToasterService,
+    private statusBar: StatusBar,
+
 
   ) { }
 
@@ -83,9 +86,9 @@ export class LoginPage implements OnInit {
               cssClass: 'my-custom-class',
               message: 'Please wait...',
             });
-            if(data.email.length < 3) {
+            if (data.email.length < 3) {
               this.presentAlert('Email Required');
-            }else {
+            } else {
               await loading.present();
               this.apis.reset_Password(
                 data.email
@@ -105,7 +108,7 @@ export class LoginPage implements OnInit {
                   this.presentAlert(error.message);
                 }
               )
-            } 
+            }
           }
         }
       ]
@@ -117,6 +120,8 @@ export class LoginPage implements OnInit {
     if (localStorage.getItem('uuid')) {
       this.router.navigateByUrl('home/updates');
     }
+
+    this.statusBar.overlaysWebView(true);
 
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -139,31 +144,46 @@ export class LoginPage implements OnInit {
       cssClass: 'my-custom-class',
       message: 'logging in...',
     });
-    await loading.present();
     let dataset = this.loginForm.value;
-    this.apis.login(
-      dataset.email,
-      dataset.password
-    ).subscribe(
-      data => {
-        if (data.status == 0) {
+
+    if (dataset.email == '' || dataset.password == '') {
+      this.presentAlert('All fields are requred!');
+    } else if (!this.apis.validateEmail(dataset.email)) {
+      this.presentAlert("Invalid Email inputed");
+    } else {
+      await loading.present();
+      this.apis.login(
+        dataset.email,
+        dataset.password
+      ).subscribe(
+        data => {
+          if (data.status == 0) {
+            loading.dismiss();
+            console.log(data);
+            localStorage.setItem('uuid', data.data[0].usr_unique_id);
+            localStorage.setItem('ur', data.data[0].usr_role);
+            this.router.navigateByUrl('/home/updates');
+          } else {
+            loading.dismiss();
+            this.presentToast(data.msg);
+          }
+        }, error => {
+          //console.log(error);
           loading.dismiss();
-          console.log(data);
-          localStorage.setItem('uuid', data.data[0].usr_unique_id);
-          localStorage.setItem('ur', data.data[0].usr_role);
-          this.router.navigateByUrl('/home/updates');
-        } else {
-          loading.dismiss();
-          this.presentToast(data.msg);
+          this.presentAlert('Couldnt reach server!\n, Check your internet connection');
         }
-      }, error => {
-        //console.log(error);
-      }
-    )
+      )
+    }
+
+
+  }
+
+  ionViewCanEnter() {
+
   }
 
   ionViewWillEnter() {
-    if(localStorage.getItem('uuid')){
+    if (localStorage.getItem('uuid')) {
       this.router.navigateByUrl('home/updates');
     }
   }

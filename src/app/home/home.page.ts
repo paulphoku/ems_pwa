@@ -175,10 +175,11 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.tab_1 = [this.icon_set_off[0], this.color_off];
-    this.tab_2 = [this.icon_set_off[1], this.color_off];
-    this.tab_3 = [this.icon_set_off[2], this.color_off];
-    this.tab_4 = [this.icon_set_off[3], this.color_off];
+    this.tab_1[0] = this.icon_set_on[0]; this.tab_1[1] = this.color_on;
+      this.header = 'Updates';
+      this.tab_2[0] = this.icon_set_off[1]; this.tab_2[1] = this.color_off;
+      this.tab_3[0] = this.icon_set_off[2]; this.tab_3[1] = this.color_off;
+      this.tab_4[0] = this.icon_set_off[3]; this.tab_4[1] = this.color_off;
     this.role=localStorage.getItem('ur');
   }
 
@@ -189,7 +190,6 @@ export class HomePage implements OnInit {
   ionViewWillEnter(){
     this.closeMenu();
     this.role=localStorage.getItem('ur');
-
   }
 
 }

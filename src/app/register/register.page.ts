@@ -75,6 +75,8 @@ export class RegisterPage implements OnInit {
               }
             }, error => {
               //console.log(error);
+              loading.dismiss();
+              this.presentAlert('Couldnt reach server\n, Check your internet connection');
             }
           )
         }

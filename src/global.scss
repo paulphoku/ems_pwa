@@ -84,7 +84,7 @@ card-sucess{
 }
 
 .new-background-color{
-    --bullet-background: #795548;
+    background: #795548;
 }
   
 .child {
@@ -118,7 +118,7 @@ ion-slides {
       background: $gradient;
     }
   }
-  ion-content{
+ion-content{
     --background: #f5f6f9 no-repeat center center / cover;
 }
 ion-input[type=text] {

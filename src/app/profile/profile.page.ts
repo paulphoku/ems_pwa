@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { AlertController, ToastController, LoadingController, MenuController, NavController } from '@ionic/angular';
 import { ToasterService } from '../../services/toaster.service';
-import { discardPeriodicTasks } from '@angular/core/testing';
 
 @Component({
   selector: 'app-profile',
@@ -155,19 +154,13 @@ export class ProfilePage implements OnInit {
           name: 'pass',
           type: 'password',
           placeholder: 'New Password',
-          cssClass: 'specialClass',
-          attributes: {
-            inputmode: 'decimal'
-          }
+          cssClass: 'specialClass'
         },
         {
           name: 'pass1',
           type: 'password',
           placeholder: 'Confirm Password',
-          cssClass: 'specialClass',
-          attributes: {
-            inputmode: 'decimal'
-          }
+          cssClass: 'specialClass'
         }
       ],
       buttons: [

@@ -16,8 +16,9 @@ export class AccountPage implements OnInit {
     public toastController: ToastController,
     private alertCtrl: AlertController,
     private toaster: ToasterService,
-
-  ) { }
+  ) { 
+    
+  }
 
   Transaction = [];
   Balance;
@@ -112,7 +113,6 @@ export class AccountPage implements OnInit {
     )
   }
 
-
   get_balance() {
     this.apis.get_balance(
     ).subscribe(
@@ -159,6 +159,4 @@ export class AccountPage implements OnInit {
 
     await alert.present();
   }
-
-
 }

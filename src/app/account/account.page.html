@@ -1,95 +1,87 @@
 <ion-content>
-  <ion-grid>
-    <ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-item lines="none">
+        <ion-card-title>Balance view</ion-card-title>
+        <ion-card-title slot="end">R {{Balance}}</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+  </ion-card>
+
+
+  <ion-row>
+    <ion-card style="width: 45%;" (click)="presentAlert()">
       <ion-card-header>
-        <ion-item lines="none">
-          <ion-card-title>Balance view</ion-card-title>
-          <ion-card-title slot="end">R {{Balance}}</ion-card-title>
-        </ion-item>
+        <ion-row>
+          <ion-icon style="margin: auto" name="cellular-outline"></ion-icon>
+        </ion-row>
+        <!-- <ion-row>
+              <ion-col> -->
+        <ion-card-subtitle class="txt-center">Buy prepaid airtime</ion-card-subtitle>
+        <!-- </ion-col>
+            </ion-row> -->
       </ion-card-header>
     </ion-card>
 
-    <ion-row>
-      <ion-col>
-        <ion-card (click)="presentAlert()">
-          <ion-card-header>
-            <ion-row>
-              <ion-icon style="margin: auto" name="cellular-outline"></ion-icon>
-            </ion-row>
-            <!-- <ion-row>
+    <ion-card style="width: 45%;" (click)="addBalanceAlert()">
+      <ion-card-header>
+        <ion-row>
+          <ion-icon style="margin: auto" name="card-outline"></ion-icon>
+        </ion-row>
+        <!-- <ion-row>
               <ion-col> -->
-            <ion-card-subtitle class="txt-center">Buy prepaid airtime</ion-card-subtitle>
-            <!-- </ion-col>
+        <ion-card-subtitle style="text-align: center;">Top Up Account</ion-card-subtitle>
+        <!-- </ion-col>
             </ion-row> -->
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
+      </ion-card-header>
+    </ion-card>
+  </ion-row>
 
-      <ion-col>
-        <ion-card (click)="addBalanceAlert()">
-          <ion-card-header>
-            <ion-row>
-              <ion-icon style="margin: auto" name="card-outline"></ion-icon>
-            </ion-row>
-            <!-- <ion-row>
-              <ion-col> -->
-            <ion-card-subtitle style="text-align: center;">Top Up Account</ion-card-subtitle>
-            <!-- </ion-col>
-            </ion-row> -->
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+  <br>
 
+  <ion-list>
+    <ion-list-header>
+      Transactions
+    </ion-list-header>
 
-
-    <ion-list>
-      <ion-list-header>
-        Transactions
-      </ion-list-header>
-
-      <ion-item *ngFor="let item of Transaction" lines="none">
-        <ion-card-title slot="start">
-          <ion-col>
-            <ion-row>
-             <strong>{{item.t_day}}</strong> 
-            </ion-row>
-            <ion-row style="font-size: small;">
-              {{item.t_month}}
-            </ion-row>
-          </ion-col>
-        </ion-card-title>     
-        <ion-card-title>
-          <ion-col>
-            <ion-row style="font-size: medium;">
-              {{item.t_desc}}
-            </ion-row>
-            <ion-row>
-              {{item.tt_desc}}
-            </ion-row>
-          </ion-col>
-        </ion-card-title>
-        <ion-card-title slot="end">
-          <ion-col>
-            <ion-row *ngIf="item.t_amt>0" style="color: #087f23;">
-              R{{item.t_amt}}
-            </ion-row>
-            <ion-row *ngIf="item.t_amt<=0" style="color: danger;">
-              R{{item.t_amt}}
-            </ion-row>
-            <ion-row *ngIf="item.t_bal<=0" style="color: danger;">
-              R{{item.t_bal}}
-            </ion-row>
-            <ion-row *ngIf="item.t_bal>0" style="color: danger;">
-              R{{item.t_bal}}
-            </ion-row>
-          </ion-col>
-        </ion-card-title>
-      </ion-item>
-       
-    </ion-list>
-  </ion-grid>
-
-
-
+    <ion-item *ngFor="let item of Transaction" lines="none">
+      <ion-card-title slot="start">
+        <ion-col>
+          <ion-row>
+            <strong>{{item.t_day}}</strong>
+          </ion-row>
+          <ion-row style="font-size: small;">
+            {{item.t_month}}
+          </ion-row>
+        </ion-col>
+      </ion-card-title>
+      <ion-card-title>
+        <ion-col>
+          <ion-row style="font-size: medium;">
+            {{item.t_desc}}
+          </ion-row>
+          <ion-row>
+            {{item.tt_desc}}
+          </ion-row>
+        </ion-col>
+      </ion-card-title>
+      <ion-card-title slot="end">
+        <ion-col>
+          <ion-row *ngIf="item.t_amt>0" style="color: #087f23;font-size: medium;">
+            <strong>R{{item.t_amt}}</strong>
+          </ion-row>
+          <ion-row *ngIf="item.t_amt<=0" style="color: danger;font-size: medium;">
+            <strong>R{{item.t_amt}}</strong>
+          </ion-row>
+          <ion-row *ngIf="item.t_bal<=0" style="color: danger;font-size: medium;">
+            <strong>R{{item.t_bal}}</strong>
+          </ion-row>
+          <ion-row *ngIf="item.t_bal>0" style="color: danger;font-size: medium;">
+            <strong>R{{item.t_bal}}</strong>
+          </ion-row>
+        </ion-col>
+      </ion-card-title>
+    </ion-item>
+  </ion-list>
 </ion-content>
